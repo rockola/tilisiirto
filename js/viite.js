@@ -77,7 +77,7 @@ const Viite = (function() {
     function printFormat(viite) {
 	viite = viite.replace(/^0+/, ''); // remove leading zeros
 	return electronicFormat(viite).replace(EVERY_FIVE_CHARS,
-					       "$1" + separator);
+					       "$1 ");
     }
 
     /****************************************************************
