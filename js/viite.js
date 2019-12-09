@@ -94,6 +94,7 @@
     /****************************************************************
      */
 
+    exports.withChecksum = withChecksum;
     exports.checkViite = printFormat;
     exports.electronicFormat = printFormat;
     exports.printFormat = printFormat;
