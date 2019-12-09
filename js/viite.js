@@ -7,12 +7,12 @@ const Viite = (function() {
     */
     function checksum(v) {
 	var ret = 0;
-	var multipliers = [7, 3, 1];
+	const multipliers = [7, 3, 1];
 	
-	for (var i = 0; i < v.length; i++) {
-	    ret += multipliers[i % 3] * parseInt(v[i]);
+	var j = 0;
+	for (var i = v.length - 1; i > -1; i--) {
+	    ret += multipliers[j++ % 3] * parseInt(v[i]);
 	}
-
 	return (10 - ret % 10) % 10;
     }
 
@@ -85,6 +85,7 @@ const Viite = (function() {
 
     return {
 	checkViite,
+	checksum,
 	withChecksum,
 	electronicFormat,
 	printFormat
