@@ -1,5 +1,5 @@
 // ****************************************************************
-// banktransfer.js
+// tilisiirto.js
 
 function checkViite(viite) {
     if (viite.match(/[^0-9 ]/))
