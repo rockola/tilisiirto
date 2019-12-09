@@ -12,11 +12,25 @@ function btCreateLabel(labelFor, text) {
 }
 
 function btCreateInput(inputType, name) {
-    // return '<input type="' + inputType + '" name="' + name + '"></input>';
     return $('<input/>', {
 	type: inputType,
 	id: name,
 	name: name
+    });
+}
+
+function btCreateTextarea(name, rows, cols) {
+    if (!rows) {
+	rows = 3;
+    }
+    if (!cols) {
+	cols = 40;
+    }
+    return $('<textarea/>', {
+	id: name,
+	name: name,
+	rows: rows,
+	cols: cols
     });
 }
 
@@ -29,6 +43,14 @@ function btInput(cssClass, inputType) {
 	    .append(btCreateLabel(_for, _text))
 	    .append(btCreateInput(inputType, _for));
     });
+}
+
+function btTextarea(x) {
+    var _for = $(x).attr('for');
+    var _text = $(x).text();
+    $(x).empty();
+    $(x).append(btCreateLabel(_for, _text))
+	.append(btCreateTextarea(_for));
 }
 
 function btDate(x) {
@@ -186,7 +208,7 @@ $(function(){
 	btInput($(this), 'textfield');
     });
     $('.bt-txt').each(function(){
-	btInput($(this), 'textarea');
+	btTextarea(this);
     });
     $('.bt-date').each(function(){
 	btDate(this);
@@ -199,9 +221,9 @@ $(function(){
 
     $('#demo').click(function(){
 	$('#iban').val(IBAN.printFormat(randomIBAN()));
-	$('#saaja').val('Salli Saaja\nDokuja 13 A 498\n02150 ESPOO');
-	$('#selite').val('Keskinäisen kehumisen yhdistyksen\njäsenmaksu vuodelle 2020');
-	$('#maksaja').val('Matti Maksaja\nNollakatu 0\n00100 HELSINKI');
+	$('#saaja').val("Salli Saaja\nDogränden 13 A 498\n02150 ESBO");
+	$('#selite').val("Keskinäisen kehumisen yhdistyksen jäsenmaksu vuodelle 2020");
+	$('#maksaja').val("Matti Maksaja\nNollakatu 0\n00100 HELSINKI");
 	$('#maksajantili').val(IBAN.printFormat(randomIBAN()));
 	$('#viite').val(Viite.printFormat(randomViite()));
 	$('#summa').val(randomInt(1,999999)+','+randomInt(0,99));
@@ -230,18 +252,23 @@ $(function(){
 	var barcode = generateBarcode('svg');
 	//$('#barcode').html(barcode);
 
+	const mmperpt = 72 / 25.4;
+	function mm(n) { return n * mmperpt; }
+
 	const doc = new PDFDocument({ size: 'A4', margin: 0 });
 	const stream = doc.pipe(blobStream());
 
-	doc.text('Tilisiirto', 36, 36);
+	doc.text($('#maksaja').val(), mm(20), mm(43));
+
+	doc.text('Tilisiirto', mm(115), mm(20));
 	doc.text('IBAN ' + IBAN.printFormat($('#iban').val()));
 	doc.text('Saaja ' + $('#saaja').val());
 	doc.text('Viite ' + Viite.printFormat($('#viite').val()));
 	doc.text('Summa ' + $('#summa').val());
 	doc.text('Eräpäivä ' + $('#erapvm').val());
 
-	const thinLine = 0.37; // 0.13 * (72 / 25.4)
-	const thickLine = 1.42; // 0.5 * (72 / 25.4)
+	const thinLine = mm(0.13);
+	const thickLine = mm(0.5);
 
 	doc.lineWidth(thickLine);
 	var y = 764; // 297mm - (13/12 * 72p)
@@ -292,7 +319,7 @@ $(function(){
 	    width: 55,
 	    align: 'right'
 	});
-	doc.text(' ', 0, 716);
+	doc.text(' ', 0, 712);
 	doc.text('Allekirjoitus\nUnderskrift', {
 	    width: 55,
 	    align: 'right'
@@ -332,7 +359,7 @@ $(function(){
 
 	doc.fontSize(8).font('Helvetica-Bold');
 	doc.save();
-	doc.rotate(270).text('TILISIIRTO. GIRERING', -735, 8);
+	doc.rotate(270).text('TILISIIRTO. GIRERING', -735, 10);
 	doc.restore();
 
 	doc.fontSize(12).font('Helvetica-Bold');
@@ -341,11 +368,11 @@ $(function(){
 	doc.text($('#erapvm').val(), 355,750);
 	doc.text($('#summa').val(), 500,750);
 	doc.fontSize(10).font('Helvetica');
-	doc.text($('#saaja').val(), 75,610);
-	doc.text(' ', 325, 550);
-	doc.text($('#selite').val(), { width: 260 });
-	doc.text(' ', 72, 655);
-	doc.text($('#maksaja').val(), { width: 260 });
+	doc.text($('#saaja').val(), 75,608);
+	doc.text(' ', 325, 555);
+	doc.text($('#selite').val(), { width: 250 });
+	doc.text(' ', 75, 640);
+	doc.text($('#maksaja').val(), { width: 240 });
 
 	// Barcode
 	barcode = generateBarcode('pathOnly');
