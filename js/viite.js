@@ -30,7 +30,8 @@ const Viite = (function() {
 	if (viite.length < 4 || viite.length > 20)
 	    return false;
 	
-	return parseInt(viite[viite.length-1]) == checksum(viite.substr(0,-1));
+	return parseInt(viite[viite.length-1])
+	    == checksum(viite.substr(0,viite.length-1));
     }
 
     /**
