@@ -22,6 +22,7 @@ Finnish bank transfer form generator in client-side Javascript
   * blob-stream: [https://github.com/devongovett/blob-stream]
   * iban.js: [https://github.com/arhs/iban.js]
   * currency.js: [https://github.com/scurker/currency.js]
+  * moment: [https://github.com/moment/moment]	
 
 ## License
 MIT
