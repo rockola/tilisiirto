@@ -201,6 +201,14 @@ function randomViite() {
     return Viite.withChecksum(reference);
 }
 
+function dueDateAdd(n) {
+    if (n < 1)
+	return;
+    var invoiceDate = $('#pvm').datepicker('getDate');
+    $('#erapvm').datepicker('setDate',
+			    moment(invoiceDate).add(n, 'day').toDate());
+}
+
 $(function(){
     const version = '0.1.0';
     $('#version').html(version);
@@ -212,6 +220,11 @@ $(function(){
     });
     $('.bt-date').each(function(){
 	btDate(this);
+    });
+
+    $('#pvm').on('change', function() {
+	$('#erapvm').datepicker('setStartDate',
+				$('#pvm').datepicker('getDate'));
     });
 
     $('#iban').btAppendOK(IBAN.isValid);
@@ -228,6 +241,9 @@ $(function(){
 	$('#viite').val(Viite.printFormat(randomViite()));
 	$('#summa').val(randomInt(1,999999)+','+randomInt(0,99));
     });
+
+    $('#plus14').click(function(){ dueDateAdd(14); });
+    $('#plus30').click(function(){ dueDateAdd(30); });
 
     $('#luo').click(function(){
 
