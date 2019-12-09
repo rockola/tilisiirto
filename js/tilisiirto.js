@@ -196,7 +196,7 @@ $(function(){
 	$('#selite').val('Keskinäisen kehumisen yhdistyksen\njäsenmaksu vuodelle 2020');
 	$('#maksaja').val('Matti Maksaja\nNollakatu 0\n00100 HELSINKI');
 	$('#maksajantili').val(IBAN.printFormat(randomIBAN()));
-	$('#viite').val(randomViite());
+	$('#viite').val(Viite.printFormat(randomViite()));
 	$('#summa').val('9157,24');
     });
 
