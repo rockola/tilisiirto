@@ -188,6 +188,8 @@ $(function(){
     });
 
     $('#iban').btAppendOK(IBAN.isValid);
+    // BIC is not used for now - not required with EUR transfers
+    $('#bic').prop("disabled", true); 
     $('#viite').btAppendOK(Viite.checkViite);
 
     $('#demo').click(function(){
