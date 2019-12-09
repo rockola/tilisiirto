@@ -35,8 +35,8 @@ Finnish bank transfer form generator in client-side Javascript
 
 ### Further reading
 
-The following publications (in Finnish) by (Finanssiala
-ry)[finanssiala.fi] are required reading for hackers and recommended
+The following publications (in Finnish) by [Finanssiala
+ry](https://finanssiala.fi) are required reading for hackers and recommended
 reading for the curious:
 
 * Tilisiirto-opas
