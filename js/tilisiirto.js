@@ -229,7 +229,7 @@ $(function(){
 	doc.text('Tilisiirto', 36, 36);
 	doc.text('IBAN ' + IBAN.printFormat($('#iban').val()));
 	doc.text('Saaja ' + $('#saaja').val());
-	doc.text('Viite ' + $('#viite').val());
+	doc.text('Viite ' + Viite.printFormat($('#viite').val()));
 	doc.text('Summa ' + $('#summa').val());
 	doc.text('Eräpäivä ' + $('#erapvm').val());
 
@@ -330,7 +330,7 @@ $(function(){
 
 	doc.fontSize(12).font('Helvetica-Bold');
 	doc.text(IBAN.printFormat($('#iban').val()), 75,575);
-	doc.text($('#viite').val(), 355,725);
+	doc.text(Viite.printFormat($('#viite').val()), 355,725);
 	doc.text($('#erapvm').val(), 355,750);
 	doc.text($('#summa').val(), 500,750);
 	doc.fontSize(10).font('Helvetica');
