@@ -277,17 +277,23 @@ $(function(){
 	doc.text($('#maksaja').val(), mm(20), mm(43));
 
 	doc.text('Tilisiirto', mm(115), mm(20));
-	doc.text('IBAN ' + IBAN.printFormat($('#iban').val()));
+	doc.text('Laskun pvm ' + $('#pvm').val());
 	doc.text('Saaja ' + $('#saaja').val());
 	doc.text('Viite ' + Viite.printFormat($('#viite').val()));
+	doc.text('IBAN ' + IBAN.printFormat($('#iban').val()));
 	doc.text('Summa ' + $('#summa').val());
 	doc.text('Eräpäivä ' + $('#erapvm').val());
+
+	doc.text(' ', mm(10), mm(87));
+	doc.text($('#selite').val(), { width: mm(190) });
 
 	const thinLine = mm(0.13);
 	const thickLine = mm(0.5);
 
 	doc.lineWidth(thickLine);
-	var y = 764; // 297mm - (13/12 * 72p)
+	var y = mm(85);
+	doc.moveTo(0,y).lineTo(595,y).stroke;
+	y = 764; // 297mm - (13/12 * 72p)
 	doc.moveTo(0,y).lineTo(595,y).stroke();
 	y = 740; // 297mm - ((13+4)/12 * 72p)
 	doc.moveTo(0,y).lineTo(595,y).stroke();
