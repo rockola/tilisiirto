@@ -6,14 +6,14 @@ const Viite = (function() {
        v - bank reference without checksum digit
     */
     function checksum(v) {
-	var checksum = 0;
+	var ret = 0;
 	var multipliers = [7, 3, 1];
 	
-	for (var i = 0; i < v.length - 1; i++) {
-	    checksum += multipliers[i % 3] * parseInt(v[i]);
+	for (var i = 0; i < v.length; i++) {
+	    ret += multipliers[i % 3] * parseInt(v[i]);
 	}
 
-	return (10 - checksum % 10) % 10;
+	return (10 - ret % 10) % 10;
     }
 
     /**
