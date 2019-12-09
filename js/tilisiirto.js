@@ -116,7 +116,7 @@ function generateBarcode(outputType) {
 	+ zeroFormat(theSum.dollars(), 6)
 	+ zeroFormat(theSum.cents(), 2)
 	+ '000'
-	+ zeroFormat(Viite.electronicFormat($('#viite').val()), 20)
+	+ Viite.electronicFormat($('#viite').val(), 20)
 	+ theYear
 	+ theMonth
 	+ theDay;
@@ -161,6 +161,19 @@ function randomIBAN() {
     return IBAN.fromBBAN('FI', acct);
 }
 
+/**
+   Generates a random bank reference for testing purposes.
+*/
+function randomViite() {
+    function randomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min)) + min;
+    }
+    var reference = randomInt(100, Number.MAX_SAFE_INTEGER);
+    return Viite.withChecksum(reference.toString());
+}
+
 $(function(){
     const version = '0.1.0';
     $('#version').html(version);
@@ -183,7 +196,7 @@ $(function(){
 	$('#selite').val('Keskinäisen kehumisen yhdistyksen\njäsenmaksu vuodelle 2020');
 	$('#maksaja').val('Matti Maksaja\nNollakatu 0\n00100 HELSINKI');
 	$('#maksajantili').val(IBAN.printFormat(randomIBAN()));
-	$('#viite').val('10001 0');
+	$('#viite').val(randomViite());
 	$('#summa').val('9157,24');
     });
 
