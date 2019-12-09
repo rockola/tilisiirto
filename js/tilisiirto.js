@@ -276,7 +276,7 @@ $(function(){
 
 	doc.text($('#maksaja').val(), mm(20), mm(43));
 
-	doc.text('Tilisiirto', mm(115), mm(20));
+	doc.text('LASKU', mm(115), mm(20));
 	doc.text('Laskun pvm ' + $('#pvm').val());
 	doc.text('Saaja ' + $('#saaja').val());
 	doc.text('Viite ' + Viite.printFormat($('#viite').val()));
