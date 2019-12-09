@@ -28,8 +28,10 @@ Finnish bank transfer form generator in client-side Javascript
 [https://rockola.github.io/tilisiirto/] (only in Finnish)
 
 ## Install
-`% mkdir -p /var/www/html/tilisiirto/`
-`% cp -r index.html css js /var/www/html/tilisiirto/`
+~~~~
+% mkdir -p /var/www/html/tilisiirto/
+% cp -r index.html css js /var/www/html/tilisiirto/
+~~~~
 
 ## License
 MIT
