@@ -161,17 +161,22 @@ function randomIBAN() {
     return IBAN.fromBBAN('FI', acct);
 }
 
+/** 
+    Random integer between MIN and MAX, inclusive.
+*/
+function randomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 /**
    Generates a random bank reference for testing purposes.
 */
 function randomViite() {
-    function randomInt(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min)) + min;
-    }
-    var reference = randomInt(100, Number.MAX_SAFE_INTEGER);
-    return Viite.withChecksum(reference.toString());
+    var reference = randomInt(100, Number.MAX_SAFE_INTEGER).toString();
+    console.log('ref '+reference);
+    return Viite.withChecksum(reference);
 }
 
 $(function(){
@@ -199,7 +204,7 @@ $(function(){
 	$('#maksaja').val('Matti Maksaja\nNollakatu 0\n00100 HELSINKI');
 	$('#maksajantili').val(IBAN.printFormat(randomIBAN()));
 	$('#viite').val(Viite.printFormat(randomViite()));
-	$('#summa').val('9157,24');
+	$('#summa').val(randomInt(1,999999)+','+randomInt(0,99));
     });
 
     $('#luo').click(function(){
