@@ -1,0 +1,25 @@
+.ok {
+    color: green;
+}
+
+.notok {
+    color: red;
+}
+
+.bt-button {
+    display: block;
+    background-color: yellow;
+    color: blue;
+    border: 1px black;
+}
+
+#version {
+    font-size: 6px;
+    margin: 0;
+}
+
+#transferpdf {
+    width: 800;
+    height: 1200;
+    margin-left: 50px;
+}
