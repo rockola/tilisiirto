@@ -25,7 +25,7 @@ Finnish bank transfer form generator in client-side Javascript
   * moment: [https://github.com/moment/moment]	
 
 ## Test drive
-[https://rockola.github.io/tilisiirto/]
+[https://rockola.github.io/tilisiirto/] (only in Finnish)
 
 ## License
 MIT
