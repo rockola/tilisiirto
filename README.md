@@ -8,6 +8,7 @@ Finnish bank transfer form generator in client-side Javascript
 * index.html
 * css/tilisiirto.css
 * js/tilisiirto.js
+* js/viite.js
 * js/code128.js
 
 ## Requirements

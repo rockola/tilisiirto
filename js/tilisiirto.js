@@ -1,27 +1,6 @@
 // ****************************************************************
 // tilisiirto.js
 
-function checkViite(viite) {
-    if (viite.match(/[^0-9 ]/))
-	return false;
-
-    // remove spaces & leading zeros
-    viite = viite.replace(/ /g, '').replace(/^[0]+/, '');
-
-    // valid codes are between 4 and 20 digits in length
-    if (viite.length < 4 || viite.length > 20)
-	return false;
-
-    var checksum = 0;
-    var multipliers = [7, 3, 1];
-
-    for (var i = 0; i < viite.length - 1; i++) {
-	checksum += multipliers[i % 3] * parseInt(viite[i]);
-    }
-
-    return parseInt(viite[viite.length-1]) == ((10 - checksum % 10) % 10);
-}
-
 // ****************************************************************
 
 function btCreateLabel(labelFor, text) {
@@ -137,7 +116,7 @@ function generateBarcode(outputType) {
 	+ zeroFormat(theSum.dollars(), 6)
 	+ zeroFormat(theSum.cents(), 2)
 	+ '000'
-	+ zeroFormat($('#viite').val().replace(/ /g, ''), 20)
+	+ zeroFormat(Viite.electronicFormat($('#viite').val()), 20)
 	+ theYear
 	+ theMonth
 	+ theDay;
@@ -196,11 +175,11 @@ $(function(){
     });
 
     $('#iban').btAppendOK(IBAN.isValid);
-    $('#viite').btAppendOK(checkViite);
+    $('#viite').btAppendOK(Viite.checkViite);
 
     $('#demo').click(function(){
 	$('#iban').val(IBAN.printFormat(randomIBAN()));
-	$('#saaja').val('Foo Bar');
+	$('#saaja').val('Salli Saaja\nDokuja 13 A 498\n02150 ESPOO');
 	$('#selite').val('Keskinäisen kehumisen yhdistyksen\njäsenmaksu vuodelle 2020');
 	$('#maksaja').val('Matti Maksaja\nNollakatu 0\n00100 HELSINKI');
 	$('#maksajantili').val(IBAN.printFormat(randomIBAN()));
@@ -223,7 +202,7 @@ $(function(){
 	}
 
 	var viite = $('#viite').val();
-	if (viite != '' && !checkViite(viite)) {
+	if (viite != '' && !Viite.checkViite(viite)) {
 	    alert('Laskun viite [' + viite + '] ei ole laillinen viite. Tarkista viite.');
 	    return false;
 	}
